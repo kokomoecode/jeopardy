@@ -2,7 +2,8 @@
 
 initBoard()
 initCatRow()
-buildCategories()
+
+document.querySelector('button').addEventListener('click',buildCategories)
 
 
 function initCatRow(){
@@ -40,9 +41,16 @@ function initBoard(){
     }
 }
 
+
+
 function randInt(){
     return Math.floor(Math.random()* (18418) + 1)
 }
+
+
+let catArray = []
+
+
 
 function buildCategories(){
 
@@ -69,20 +77,36 @@ function buildCategories(){
 
     allData.then((res) => {
         console.log(res)
+        catArray = res
+        setCategories(catArray)
     })
 
 }
 
+//LOAD CATEGORIES TO THE BOARD
+
+function setCategories(catArray){
+    let element = document.getElementById('category-row')
+    let children = element.children;
+    for(let i = 0; i < children.length; i++){
+        children[i].innerHTML = catArray[i].title
+    }
+
+}
 
 
+// FIGURE OUT WHICH ITEM WAS CLICKED
 
-
-
-
-
-
-
-
-function getClue() {
-    console.log("YO")
+function getClue(event) {
+    let child = event.currentTarget
+    child.classList.add('clicked-box')
+    let boxValue = child.innerHTML.slice(1) //boxvalue
+    let parent = child.parentNode //figuring out which row is the parent
+    let index = Array.prototype.findIndex.call(parent.children, (c) => c === child) //find the INDEX of which row.
+    console.log(index) 
+    let cluesList = catArray[index].clues
+    let clue = cluesList.find(obj => {
+        return obj.value == boxValue
+    })
+    showQuestion(clue,child,boxValue)
 }
