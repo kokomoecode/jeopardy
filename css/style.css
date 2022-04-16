@@ -70,12 +70,29 @@ span{
 
 .clue-box{
   display: flex;
-  border: 2px solid green;
+  align-items: center; /*vertical*/
+  justify-content: center; /*horizontal*/
+  border: 2px solid white;
+  background-color: navy;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
   border-radius: 5px;
   margin: 5px;
   height: 100px;
   flex: 1;
 }
+
+.category-box{
+  font-size: .8rem;
+  line-height: 25px;
+}
+
+.clicked-box{
+  font-size: 1rem;
+}
+
 
 
 
